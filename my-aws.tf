@@ -1,3 +1,8 @@
+
+terraform {
+  #required_version = ""
+}
+
 provider "aws" {
   region = "ap-southeast-2"
 }
@@ -10,10 +15,10 @@ data "aws_vpc" "myvpc" {
 }
 
 
-module my-ec2{
-  source = "./modules/ec2"
-  vm_name =   "my-first-tf-node"
-  subnet_id  = aws_subnet.mysubnet.id
+module "my-ec2" {
+  source       = "./modules/ec2"
+  vm_name      = "my-first-tf-node"
+  subnet_id    = aws_subnet.mysubnet.id
   my_sec_group = [aws_security_group.my-ec2-sec-group.id]
 }
 
