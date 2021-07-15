@@ -19,7 +19,13 @@ module "my-ec2" {
   source       = "./modules/ec2"
   vm_name      = "my-first-tf-node"
   subnet_id    = aws_subnet.mysubnet.id
-  my_sec_group = [aws_security_group.my-ec2-sec-group.id]
+  my_sec_group = [module.my-sg.id]
+}
+
+module "my-sg" {
+  source      = "./modules/sg"
+  vpc_id      = data.aws_vpc.myvpc.id
+  cidr_blocks = [data.aws_vpc.myvpc.cidr_block]
 }
 
 resource "aws_subnet" "mysubnet" {

@@ -1,5 +1,4 @@
 terraform {
-
   backend "s3" {
     bucket         = "zolinz-terraform-state-backend"
     region         = "ap-southeast-2"
