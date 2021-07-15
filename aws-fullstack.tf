@@ -1,12 +1,4 @@
 
-terraform {
-  #required_version = ""
-}
-
-provider "aws" {
-  region = "ap-southeast-2"
-}
-
 
 data "aws_vpc" "myvpc" {
   tags = {
