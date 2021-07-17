@@ -1,10 +1,19 @@
 
-
 data "aws_vpc" "myvpc" {
   tags = {
     Name = "kk-tf-vpc"
   }
 }
+
+resource "aws_subnet" "mysubnet" {
+  vpc_id     = data.aws_vpc.myvpc.id
+  cidr_block = "10.0.1.0/24"
+
+  tags = {
+    Name = "my-test-subnet"
+  }
+}
+
 
 
 module "my-ec2" {
@@ -18,13 +27,4 @@ module "my-sg" {
   source      = "./modules/sg"
   vpc_id      = data.aws_vpc.myvpc.id
   cidr_blocks = [data.aws_vpc.myvpc.cidr_block]
-}
-
-resource "aws_subnet" "mysubnet" {
-  vpc_id     = data.aws_vpc.myvpc.id
-  cidr_block = "10.0.1.0/24"
-
-  tags = {
-    Name = "my-test-subnet"
-  }
 }
