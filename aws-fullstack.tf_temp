@@ -25,6 +25,6 @@ module "my-ec2" {
 
 module "my-sg" {
   source      = "./modules/sg"
-  vpc_id      = data.aws_vpc.myvpc.id
+  vpc_id      = data.aws_vpc.myvpc.id 
   cidr_blocks = [data.aws_vpc.myvpc.cidr_block]
 }
